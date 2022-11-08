@@ -3,8 +3,8 @@ import jwt from "jsonwebtoken";
 
 export const refreshToken = async (req, res) => {
 	try {
-		const refreshToken = req.cookies.refreshToken;
-		if (!refreshToken) {
+		const refreshToken = req.body.refreshToken;
+		if (refreshToken == null) {
 			return res.sendStatus(401);
 		}
 

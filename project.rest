@@ -1,0 +1,13 @@
+GET http://localhost:5000/projects
+
+###
+POST http://localhost:5000/projects
+Content-Type: application/json
+
+{
+    "project_name": "BRIVA Website",
+    "deal_price": 15000000,
+    "status": "Not Started",
+    "duration": 1,
+    "worker": 8
+}

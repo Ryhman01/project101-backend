@@ -77,13 +77,14 @@ export const Login = async (req, res) => {
 			}
 		);
 
-		res.cookie("refreshToken", refreshToken, {
-			httpOnly: true,
-			maxAge: 24 * 60 * 60 * 1000,
-		});
+		// res.cookie("refreshToken", refreshToken, {
+		// 	httpOnly: true,
+		// 	maxAge: 24 * 60 * 60 * 1000,
+		// });
 
 		res.json({
 			accessToken,
+			refreshToken
 		});
 	} catch (error) {
 		res.status(404).json({
@@ -93,7 +94,7 @@ export const Login = async (req, res) => {
 };
 
 export const Logout = async (req, res) => {
-	const refreshToken = req.cookies.refreshToken;
+	const refreshToken = req.body.refreshToken;
 	if (!refreshToken) return res.sendStatus(204);
 	const user = await Users.findAll({
 		where: {
@@ -113,6 +114,5 @@ export const Logout = async (req, res) => {
 		}
 	);
 
-	res.clearCookie('refreshToken');
 	return res.sendStatus(200);
 };
