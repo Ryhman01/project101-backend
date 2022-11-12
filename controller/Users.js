@@ -7,33 +7,31 @@ export const getUsers = async (req, res) => {
 		const users = await Users.findAll({
 			attributes: ["id", "name", "email", "username", "role", "address"],
 		});
-		res.json(users);
+		res.status(200).json(users);
 	} catch (error) {
 		console.error(error);
 	}
 };
 
-export const Register = async (req, res) => {
-	const { name, email, username, password, confPassword, role, address } = req.body;
-	if (password !== confPassword)
+export const addUser = async (req, res) => {
+	
+	if (req.body.password !== req.body.confPassword)
 		return res.status(400).json({
 			message: "Password and Confirm Password not match.",
 		});
 
 	const salt = await bcrypt.genSalt();
-	const hashPassword = await bcrypt.hash(password, salt);
+	const hashPassword = await bcrypt.hash(req.body.password, salt);
 	try {
 		await Users.create({
-			name: name,
-			email: email,
-			username: username,
+			name: req.body.name,
+			email: req.body.email,
+			username: req.body.username,
 			password: hashPassword,
-			role: role,
-			address: address,
+			role: req.body.role,
+			address: req.body.address,
 		});
-		res.json({
-			message: "Register success.",
-		});
+		res.sendStatus(200);
 	} catch (error) {
 		console.error(error);
 	}
@@ -60,10 +58,10 @@ export const Login = async (req, res) => {
 		const role = user[0].role;
 		const address = user[0].address;
 		const accessToken = jwt.sign({ userId, name, email, username, role, address }, process.env.ACCESS_TOKEN_SECRET, {
-			expiresIn: "60s",
+			expiresIn: "10m",
 		});
 		const refreshToken = jwt.sign({ userId, name, email, username, role, address }, process.env.REFRESH_TOKEN_SECRET, {
-			expiresIn: "1h",
+			expiresIn: "2h",
 		});
 
 		await Users.update(
@@ -77,12 +75,7 @@ export const Login = async (req, res) => {
 			}
 		);
 
-		// res.cookie("refreshToken", refreshToken, {
-		// 	httpOnly: true,
-		// 	maxAge: 24 * 60 * 60 * 1000,
-		// });
-
-		res.json({
+		res.status(200).json({
 			accessToken,
 			refreshToken
 		});
@@ -116,3 +109,42 @@ export const Logout = async (req, res) => {
 
 	return res.sendStatus(200);
 };
+
+export const getUserById = async(req, res) => {
+	try {
+		const response = await Users.findOne({
+			where:{
+				id: req.params.id
+			}
+		})
+		res.status(200).json(response);
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+export const updateUser = async(req, res) => {
+	try {
+		await Users.update(req.body,{
+			where:{
+				id: req.params.id
+			}
+		})
+		res.sendStatus(200)
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export const deleteUser = async(req, res) => {
+	try {
+		await Users.destroy({
+			where:{
+				id: req.params.id
+			}
+		})
+		res.sendStatus(200)
+	} catch (error) {
+		console.log(error);
+	}
+}

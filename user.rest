@@ -1,21 +1,3 @@
-GET http://localhost:5000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJSeWhtYW4gQWppIFBhbmdpc3R1IiwiZW1haWwiOiJyeTAwaG1hbkBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoicnkwMGhtYW4iLCJyb2xlIjoiYWRtaW4iLCJhZGRyZXNzIjoiR2FydXQiLCJpYXQiOjE2Njc4NzIwODMsImV4cCI6MTY2Nzg3MjE0M30.HgiwGdSrviZe31Mc894ciqHbIHj1YxaFPCtfTVLYh3s
-
-###
-POST http://localhost:5000/register
-Content-Type: application/json
-
-{
-    "name": "Ryhman Aji Pangistu",
-    "email": "ry00hman@example.com",
-    "username": "ry00hman",
-    "password": "secret",
-    "confPassword": "secret",
-    "role": "admin",
-    "address": "Garut"
-}
-
-###
 POST http://localhost:5000/login
 Content-Type: application/json
 
@@ -29,13 +11,14 @@ POST http://localhost:5000/token
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJSeWhtYW4gQWppIFBhbmdpc3R1IiwiZW1haWwiOiJyeTAwaG1hbkBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoicnkwMGhtYW4iLCJyb2xlIjoiYWRtaW4iLCJhZGRyZXNzIjoiR2FydXQiLCJpYXQiOjE2Njc4NzIwNDksImV4cCI6MTY2Nzg3NTY0OX0.UEHxah1wnWBDhbdhYyxFIxq8bCV1hmjjTxGbcRE5BRw"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJSeWhtYW4iLCJlbWFpbCI6InJ5MDBobWFuQGV4YW1wbGUuY29tIiwidXNlcm5hbWUiOiJyeTAwaG1hbiIsInJvbGUiOiJBZG1pbiIsImFkZHJlc3MiOiJCYW5kdW5nIiwiaWF0IjoxNjY4MjY2ODIyLCJleHAiOjE2NjgyNzQwMjJ9.iIaIRgwJN2jagY6UdhwCstH5AlfMp9yG-FUMfW84AII"
 }
 
 ###
-DELETE http://localhost:5000/logout
+GET http://localhost:5000/project-status
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJSeWhtYW4iLCJlbWFpbCI6InJ5MDBobWFuQGV4YW1wbGUuY29tIiwidXNlcm5hbWUiOiJyeTAwaG1hbiIsInJvbGUiOiJBZG1pbiIsImFkZHJlc3MiOiJCYW5kdW5nIiwiaWF0IjoxNjY4MjY2ODMzLCJleHAiOjE2NjgyNjc0MzN9.-t_cgsm7YOnAmMir_MOaDHh2aBneSzXsWqRvcN4wzF0
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJSeWhtYW4gQWppIFBhbmdpc3R1IiwiZW1haWwiOiJyeTAwaG1hbkBleGFtcGxlLmNvbSIsInVzZXJuYW1lIjoicnkwMGhtYW4iLCJyb2xlIjoiYWRtaW4iLCJhZGRyZXNzIjoiR2FydXQiLCJpYXQiOjE2Njc4NzIwNDksImV4cCI6MTY2Nzg3NTY0OX0.UEHxah1wnWBDhbdhYyxFIxq8bCV1hmjjTxGbcRE5BRw"
+    "status": "Not Started"
 }
