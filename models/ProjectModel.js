@@ -12,6 +12,9 @@ const Projects = db.define(
 		deal_price: {
 			type: DataTypes.BIGINT,
 		},
+		fee:{
+			type: DataTypes.INTEGER
+		},
 		status: {
 			type: DataTypes.STRING,
 		},

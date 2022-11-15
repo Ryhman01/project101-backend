@@ -1,13 +1,18 @@
-GET http://localhost:5000/projects
+POST http://localhost:5000/percentage
+Content-Type: application/json
+
+{
+    "deal_price" : 5000001
+}
 
 ###
 POST http://localhost:5000/projects
 Content-Type: application/json
 
 {
-    "project_name": "BRIVA Website",
-    "deal_price": 15000000,
-    "status": "Not Started",
-    "duration": 1,
-    "worker": 8
+    "projectName" : "Alfagift App",
+    "dealPrice" : 25000000,
+    "status" : "Not Started",
+    "worker" : 5,
+    "duration" : 6
 }

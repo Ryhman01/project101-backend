@@ -4,6 +4,7 @@ import { verifyToken } from '../middleware/VerifyToken.js';
 import { refreshToken } from '../controller/RefreshToken.js';
 import { addProject, deleteProject, getProjectById, getProjects, projectCounter, updateProject } from '../controller/Projects.js';
 import { addPrice, deletePrice, getPriceById, getPrices, updatePrice } from '../controller/Prices.js';
+import { percentage } from '../controller/Percentage.js';
 
 const router = express.Router();
 
@@ -30,5 +31,6 @@ router.post('/prices', addPrice);
 router.put('/prices/:id', updatePrice);
 router.delete('/prices/:id', deletePrice);
 
+router.post('/percentage', percentage);
 
 export default router;

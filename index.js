@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import Prices from "./models/PriceModel.js";
+import Projects from "./models/ProjectModel.js";
 
 dotenv.config();
 const app = express();
