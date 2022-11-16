@@ -11,8 +11,13 @@ export const getProjects = async (req, res) => {
 };
 
 export const addProject = async (req, res) => {
-	const { projectName, dealPrice, status, duration, worker } = req.body;
+	const { projectName, projectType, dealPrice, status, duration, worker } = req.body;
 	let percent = 0;
+	let fee = 0;
+	let tax = 0;
+	let netProfit = 0;
+	let costPerMonth = 0;
+	let costPerWorker = 0;
 
 	try {
 		const response = await Prices.findAll({
@@ -20,18 +25,38 @@ export const addProject = async (req, res) => {
 		});
 		response.forEach((e) => {
 			if (dealPrice >= e.min_price && dealPrice <= e.max_price) {
-				Projects.create({
-					project_name: projectName,
-					deal_price: dealPrice,
-					fee: e.percentage,
-					status: status,
-					duration: duration,
-					worker: worker,
-				});
+				// Projects.create({
+				// 	project_name: projectName,
+				// 	deal_price: dealPrice,
+				// 	fee: e.percentage,
+				// 	status: status,
+				// 	duration: duration,
+				// 	worker: worker,
+				// });
+				percent = e.percentage
 			}
 		});
 
-		res.json({ message: 'Add Project success', fee: percent });
+		tax = Math.floor(dealPrice * (11 / 100));
+		fee = Math.floor(dealPrice * (percent / 100));
+		netProfit = Math.floor(dealPrice - tax - fee);
+		costPerMonth = Math.floor(netProfit / duration);
+		costPerWorker = Math.floor(costPerMonth / worker);
+
+		await Projects.create({
+			project_name: projectName,
+			project_type: projectType,
+			deal_price: dealPrice,
+			tax: tax,
+			fee_percentage: percent,
+			fee_nominal: fee,
+			net_profit: netProfit,
+			cost_per_month: costPerMonth,
+			cost_per_worker: costPerWorker,
+			worker: worker,
+			duration: duration
+		})
+		res.sendStatus(200);
 	} catch (error) {
 		console.log(error);
 	}

@@ -1,18 +1,10 @@
-POST http://localhost:5000/percentage
-Content-Type: application/json
-
-{
-    "deal_price" : 5000001
-}
-
-###
 POST http://localhost:5000/projects
 Content-Type: application/json
 
 {
-    "projectName" : "Alfagift App",
-    "dealPrice" : 25000000,
-    "status" : "Not Started",
-    "worker" : 5,
-    "duration" : 6
+    "projectName": "Ordering App Upnormal",
+    "projectType": "Mobile",
+    "dealPrice": 32000000,
+    "worker": 4,
+    "duration": 3
 }

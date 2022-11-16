@@ -13,6 +13,7 @@ const app = express();
 try {
 	await db.authenticate();
 	console.log("Database Connected...");
+	await Projects.sync();
 } catch (error) {
 	console.error(error);
 }
